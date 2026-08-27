@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { MessageCircle, X, Send } from 'lucide-react'
 
 export default function Chatbot() {
 
@@ -8,7 +9,7 @@ export default function Chatbot() {
   const [messages, setMessages] = useState([
     {
       role: 'assistant',
-      content: "Hi! I am Victoria's AI assistant. Ask me anything about her skills, projects or experience! 👋"
+      content: "Hi, I'm Victoria's assistant. Ask me anything about her skills, projects, or experience."
     }
   ])
   const [input, setInput] = useState('')
@@ -49,7 +50,7 @@ export default function Chatbot() {
       console.error('Chat error:', error)
       setMessages([...newMessages, {
         role: 'assistant',
-        content: '⚠️ Something went wrong. Please try again.'
+        content: 'Something went wrong. Please try again.'
       }])
     } finally {
       setLoading(false)
@@ -70,7 +71,9 @@ export default function Chatbot() {
                 <p className="chatbot-status">Online</p>
               </div>
             </div>
-            <button onClick={toggleChat} className="chatbot-close">✕</button>
+            <button onClick={toggleChat} className="chatbot-close" aria-label="Close chat">
+              <X size={16} />
+            </button>
           </div>
 
           <div className="chatbot-messages">
@@ -95,14 +98,16 @@ export default function Chatbot() {
               placeholder="Ask me about Victoria..."
               className="chatbot-input"
             />
-            <button onClick={sendMessage} className="chatbot-send">➤</button>
+            <button onClick={sendMessage} className="chatbot-send" aria-label="Send message">
+              <Send size={15} />
+            </button>
           </div>
 
         </div>
       )}
 
-      <button onClick={toggleChat} className="chatbot-toggle">
-        {isOpen ? '✕' : '💬'}
+      <button onClick={toggleChat} className="chatbot-toggle" aria-label="Toggle chat">
+        {isOpen ? <X size={20} /> : <MessageCircle size={20} />}
       </button>
 
     </div>

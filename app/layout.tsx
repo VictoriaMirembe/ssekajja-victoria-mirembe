@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Chatbot from "./components/Chatbot";
-import CustomCursor from "./components/CustomCursor";
 import Footer from "./components/Footer";
 import Nav from "./components/Nav";
 import SideNav from "./components/SideNav";
@@ -19,8 +18,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Victoria Ssekajja — Software Developer",
-  description: "Portfolio of Victoria Ssekajja, a Software Developer building web, mobile, and AI-integrated applications, based in Kampala, Uganda.",
+  title: "Victoria Ssekajja — Frontend Developer",
+  description: "Portfolio of Victoria Ssekajja, a Frontend Developer building interfaces with React and Next.js, based in Kampala, Uganda.",
 };
 
 export default function RootLayout({
@@ -36,7 +35,6 @@ export default function RootLayout({
     >
       <body>
         <ThemeProvider>
-          <CustomCursor />
           <Nav />
           {children}
           <SideNav />

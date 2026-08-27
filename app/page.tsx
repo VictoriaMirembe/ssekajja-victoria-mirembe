@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
 import Wrapper from './components/Wrapper'
@@ -16,43 +16,56 @@ import {
   SiPostgresql,
   SiGithub,
 } from 'react-icons/si'
-import { Lock, Sparkles, MapPin, GraduationCap, Code2, Mail, Send } from 'lucide-react'
+import {
+  Sparkles,
+  MapPin,
+  GraduationCap,
+  Code2,
+  Mail,
+  Send,
+  Copy,
+  Check,
+  LayoutTemplate,
+  Palette,
+  Plane,
+  BookOpen,
+} from 'lucide-react'
 import { FaLinkedin } from 'react-icons/fa'
-import { useTheme } from './context/ThemeContext'
 
-const HERO_IMAGE_LIGHT = 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1600&q=80'
-
-const SKILLS = [
+const FRONTEND_SKILLS = [
   { label: 'HTML & CSS', href: 'https://developer.mozilla.org/en-US/docs/Web/HTML', Icon: SiHtml5, color: '#E34F26' },
   { label: 'JavaScript', href: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript', Icon: SiJavascript, color: '#F7DF1E' },
   { label: 'TypeScript', href: 'https://www.typescriptlang.org/docs/', Icon: SiTypescript, color: '#3178C6' },
   { label: 'React', href: 'https://react.dev/', Icon: SiReact, color: '#61DAFB' },
   { label: 'Next.js', href: 'https://nextjs.org/docs', Icon: SiNextdotjs, color: undefined },
-  { label: 'Python', href: 'https://docs.python.org/3/', Icon: SiPython, color: '#3776AB' },
-  { label: 'Node.js', href: 'https://nodejs.org/en/docs', Icon: SiNodedotjs, color: '#5FA04E' },
-  { label: 'Drizzle ORM', href: 'https://orm.drizzle.team/docs/overview', Icon: SiDrizzle, color: '#C5F74F' },
-  { label: 'PostgreSQL', href: 'https://www.postgresql.org/docs/', Icon: SiPostgresql, color: '#4169E1' },
-  { label: 'bcrypt', href: 'https://www.npmjs.com/package/bcrypt', Icon: Lock, color: '#6B7280' },
-  { label: 'Claude AI API', href: 'https://platform.claude.com/docs', Icon: Sparkles, color: '#D97757' },
   { label: 'Git & GitHub', href: 'https://docs.github.com/', Icon: SiGithub, color: undefined },
 ]
 
+const OTHER_SKILLS = [
+  { label: 'Node.js', href: 'https://nodejs.org/en/docs' },
+  { label: 'Python', href: 'https://docs.python.org/3/' },
+  { label: 'PostgreSQL', href: 'https://www.postgresql.org/docs/' },
+  { label: 'Drizzle ORM', href: 'https://orm.drizzle.team/docs/overview' },
+  { label: 'bcrypt', href: 'https://www.npmjs.com/package/bcrypt' },
+  { label: 'Claude AI API', href: 'https://platform.claude.com/docs' },
+]
+
+function ProjectBanner({ Icon }: { Icon: React.ComponentType<{ size?: number; strokeWidth?: number }> }) {
+  return (
+    <div className="project-card-banner">
+      <div className="banner-chrome">
+        <span className="banner-dot" />
+        <span className="banner-dot" />
+        <span className="banner-dot" />
+      </div>
+      <div className="banner-icon">
+        <Icon size={40} strokeWidth={1.5} />
+      </div>
+    </div>
+  )
+}
+
 export default function Home() {
-  const { isDark } = useTheme()
-  const fullName = "Ssekajja Victoria Mirembe,"
-  const [displayedName, setDisplayedName] = useState("")
-  const [nameIndex, setNameIndex] = useState(0)
-
-  useEffect(() => {
-    if (nameIndex < fullName.length) {
-      const timeout = setTimeout(() => {
-        setDisplayedName(prev => prev + fullName[nameIndex])
-        setNameIndex(prev => prev + 1)
-      }, 100)
-      return () => clearTimeout(timeout)
-    }
-  }, [nameIndex])
-
   const [copied, setCopied] = useState(false)
 
   function copyEmail() {
@@ -77,31 +90,20 @@ export default function Home() {
 
       <main id="home" className="page-section">
         <div className="hero-section">
-          {!isDark && (
-            <div className="hero-bg">
-              <Image
-                src={HERO_IMAGE_LIGHT}
-                alt=""
-                fill
-                priority
-                style={{ objectFit: "cover" }}
-              />
-            </div>
-          )}
-
           <div className="hero-text">
             <p className="hero-greeting">Hello, I am</p>
-            <h1>{displayedName}{nameIndex < fullName.length && <span className="cursor"></span>}</h1>
-            <h2>Software Developer</h2>
+            <h1>Ssekajja Victoria Mirembe</h1>
+            <h2>Frontend Developer</h2>
             <p className="hero-description">
-              I build web, mobile, and backend applications, and
-              integrate AI where it adds real value. Based in Kampala, Uganda.
+              I build fast, accessible, well-crafted interfaces with React and
+              Next.js, and integrate AI where it adds real value. Based in Kampala, Uganda.
             </p>
             <div className="hero-buttons">
               <a href="#projects" className="btn">View My Work</a>
               <a href="#contact" className="btn-outline">Contact Me</a>
               <button onClick={copyEmail} className="btn-outline">
-                {copied ? "✅ Copied!" : "📋 Copy Email"}
+                {copied ? <Check size={16} /> : <Copy size={16} />}
+                {copied ? "Copied" : "Copy Email"}
               </button>
             </div>
           </div>
@@ -110,8 +112,8 @@ export default function Home() {
             <Image
               src="/profile.jpg"
               alt="Victoria Ssekajja"
-              width={320}
-              height={320}
+              width={300}
+              height={300}
             />
           </div>
 
@@ -148,9 +150,10 @@ export default function Home() {
         <h1>Learn About Me</h1>
         <p className="about-hook">Turning ideas into reliable, shipped software.</p>
         <p>
-          I am Victoria, a Software Developer based in Kampala, Uganda, currently
-          working at MCI Media Lab. I build web and backend applications,
-          and integrate AI capabilities where they add real value.
+          I am Victoria, a Frontend Developer based in Kampala, Uganda, currently
+          working at MCI Media Lab. I build interfaces with React and Next.js,
+          am comfortable working across the stack when a project needs it, and
+          integrate AI capabilities where they add real value.
         </p>
 
         <div className="about-facts">
@@ -203,7 +206,7 @@ export default function Home() {
         <div className="skills">
           <h2>My Skills Set</h2>
           <div className="skills-set">
-            {SKILLS.map(({ label, href, Icon, color }) => (
+            {FRONTEND_SKILLS.map(({ label, href, Icon, color }) => (
               <a
                 key={label}
                 href={href}
@@ -218,6 +221,16 @@ export default function Home() {
               </a>
             ))}
           </div>
+          <div className="skills-secondary">
+            <p className="skills-secondary-label">Also comfortable with (backend &amp; AI)</p>
+            <div className="skills-secondary-set">
+              {OTHER_SKILLS.map(({ label, href }) => (
+                <a key={label} href={href} target="_blank" rel="noopener noreferrer" className="skill-sm">
+                  {label}
+                </a>
+              ))}
+            </div>
+          </div>
         </div>
 
         <div className="services-section">
@@ -226,9 +239,9 @@ export default function Home() {
           <div className="services">
             <div className="services-grid">
               <div className="service-card">
-                <div className="service-icon">🌐</div>
-                <h3>Web Development</h3>
-                <p>I build clean, responsive websites and platforms using React and Next.js that work on any device.</p>
+                <div className="service-icon"><LayoutTemplate size={22} /></div>
+                <h3>Frontend Engineering</h3>
+                <p>I build fast, responsive, accessible interfaces with React, Next.js, and TypeScript that work on any device.</p>
                 <div className="service-tech-tags">
                   <span className="tech-tag-sm">Next.js</span>
                   <span className="tech-tag-sm">React</span>
@@ -236,26 +249,27 @@ export default function Home() {
                 </div>
               </div>
               <div className="service-card">
-                <div className="service-icon">⚙️</div>
-                <h3>Backend & APIs</h3>
-                <p>I design APIs, databases, and backend systems that keep applications reliable as they grow.</p>
+                <div className="service-icon"><Palette size={22} /></div>
+                <h3>UI Craft &amp; Design Systems</h3>
+                <p>I turn designs into clean, consistent component systems with careful attention to detail and motion.</p>
                 <div className="service-tech-tags">
-                  <span className="tech-tag-sm">Node.js</span>
-                  <span className="tech-tag-sm">Drizzle ORM</span>
-                  <span className="tech-tag-sm">bcrypt</span>
-                  <span className="tech-tag-sm">PostgreSQL</span>
+                  <span className="tech-tag-sm">HTML &amp; CSS</span>
+                  <span className="tech-tag-sm">JavaScript</span>
                 </div>
               </div>
               <div className="service-card">
-                <div className="service-icon">🤖</div>
-                <h3>AI Integration</h3>
-                <p>I integrate AI capabilities into applications to add smart, interactive features where they add real value.</p>
+                <div className="service-icon"><Sparkles size={22} /></div>
+                <h3>AI-Enhanced Interfaces</h3>
+                <p>I integrate AI capabilities into the frontend to add smart, interactive features where they add real value.</p>
                 <div className="service-tech-tags">
-                  <span className="tech-tag-sm">Python</span>
                   <span className="tech-tag-sm">Claude API</span>
+                  <span className="tech-tag-sm">Python</span>
                 </div>
               </div>
             </div>
+            <p className="services-note">
+              I also work across the stack when a project calls for it — Node.js, PostgreSQL, and Drizzle ORM on the backend.
+            </p>
           </div>
         </div>
       </motion.section>
@@ -278,14 +292,7 @@ export default function Home() {
             rel="noopener noreferrer"
             className="featured-project-card"
           >
-            <div className="project-card-banner">
-              <Image
-                src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=800&q=80"
-                alt="Vansaac Deep Cleans"
-                fill
-                style={{ objectFit: "cover" }}
-              />
-            </div>
+            <ProjectBanner Icon={Sparkles} />
             <div className="featured-project-body">
               <span className="project-category">Business Website</span>
               <h3>Vansaac Deep Cleans</h3>
@@ -304,14 +311,7 @@ export default function Home() {
             rel="noopener noreferrer"
             className="featured-project-card"
           >
-            <div className="project-card-banner">
-              <Image
-                src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800&q=80"
-                alt="Pearl Flight"
-                fill
-                style={{ objectFit: "cover" }}
-              />
-            </div>
+            <ProjectBanner Icon={Plane} />
             <div className="featured-project-body">
               <span className="project-category">Travel & Aviation</span>
               <h3>Pearl Flight</h3>
@@ -325,14 +325,7 @@ export default function Home() {
           </a>
 
           <div className="featured-project-card">
-            <div className="project-card-banner">
-              <Image
-                src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&q=80"
-                alt="Zara — AI Story Friend"
-                fill
-                style={{ objectFit: "cover" }}
-              />
-            </div>
+            <ProjectBanner Icon={BookOpen} />
             <div className="featured-project-body">
               <span className="project-category">AI Learning Tool</span>
               <h3>Zara — AI Story Friend</h3>
@@ -346,14 +339,7 @@ export default function Home() {
           </div>
 
           <div className="featured-project-card">
-            <div className="project-card-banner">
-              <Image
-                src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=800&q=80"
-                alt="MCI E-Learning Platform"
-                fill
-                style={{ objectFit: "cover" }}
-              />
-            </div>
+            <ProjectBanner Icon={GraduationCap} />
             <div className="featured-project-body">
               <span className="project-category">E-Learning Platform</span>
               <h3>MCI E-Learning Platform</h3>

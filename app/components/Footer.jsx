@@ -1,4 +1,5 @@
 import React from 'react'
+import { MapPin } from 'lucide-react'
 
 function Footer() {
   const year = new Date().getFullYear()
@@ -10,7 +11,7 @@ function Footer() {
         <div className="footer-top">
           <div className="logo-group">
             <a href="#home" className="logo">Victoria</a>
-            <span className="location-badge">📍 Based in Kampala, Uganda</span>
+            <span className="location-badge"><MapPin size={12} /> Based in Kampala, Uganda</span>
           </div>
           <div className="footer-status">
             <span className="status-dot"></span>

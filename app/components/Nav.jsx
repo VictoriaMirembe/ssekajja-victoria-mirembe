@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { MapPin } from 'lucide-react'
 import ThemeToggle from './ThemeToggle'
 import useScrollSpy from '../hooks/useScrollSpy'
 
@@ -20,7 +21,7 @@ export default function Nav() {
     <nav>
       <div className="logo-group">
         <a href="#home" className="logo">Victoria</a>
-        <span className="location-badge">📍 Based in Kampala, Uganda</span>
+        <span className="location-badge"><MapPin size={12} /> Based in Kampala, Uganda</span>
       </div>
 
       <button
