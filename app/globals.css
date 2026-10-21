@@ -246,6 +246,12 @@ p {
   border-radius: 99px;
 }
 
+/* Practices (not technologies) get an outline-only chip. */
+.skill-practice {
+  background: transparent;
+  border-style: dashed;
+}
+
 .education {
   margin-top: 48px;
 }
