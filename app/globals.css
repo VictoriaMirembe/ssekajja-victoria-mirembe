@@ -987,6 +987,48 @@ p {
   margin-bottom: 16px;
 }
 
+.featured-project-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.project-card-shot img {
+  object-fit: cover;
+  object-position: top;
+}
+
+.project-status {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 2px 8px;
+  border: 1px solid var(--border);
+  border-radius: 99px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  vertical-align: middle;
+}
+
+.project-links {
+  display: flex;
+  gap: 16px;
+  margin-top: auto;
+  padding-top: 16px;
+}
+
+.project-link {
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.project-link:hover {
+  text-decoration: underline;
+}
+
 /* ---- FOOTER ---- */
 
 .site-footer {

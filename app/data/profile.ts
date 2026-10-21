@@ -68,6 +68,12 @@ export type Project = {
   icon: IconName
   liveUrl?: string
   repoUrl?: string
+  status?: string
+  // Real screenshot in /public/projects. Without one, the card shows an icon banner.
+  image?: {
+    src: string
+    alt: string
+  }
 }
 
 export type Profile = {
@@ -247,20 +253,46 @@ export const servicesNote =
 
 export const projects: Project[] = [
   {
+    id: 'ai-media-lab',
+    title: 'AI Media Lab Platform',
+    category: 'AI E-Learning Platform',
+    description: 'Co-developed an AI-powered innovation ecosystem utilizing LLMs and modern web infrastructure to support fact-checking and modern journalistic workflows.',
+    tags: ['Next.js', 'LLMs', 'AI APIs', 'E-Learning'],
+    icon: 'sparkles',
+    liveUrl: 'https://aimedialab.africa',
+    image: {
+      src: '/projects/ai-media-lab.jpg',
+      alt: 'AI Media Lab homepage with the headline "Supporting journalists to separate fact from fiction, with AI."',
+    },
+  },
+  {
+    id: 'hr-system',
+    title: 'HR-System',
+    category: 'HR Platform',
+    description: 'Full-stack HR platform covering onboarding, employee records, leave, attendance, payroll and a self-service portal.',
+    tags: ['Next.js', 'PostgreSQL'],
+    icon: 'layoutTemplate',
+    repoUrl: 'https://github.com/VictoriaMirembe/HR-System',
+  },
+  {
     id: 'vansaac-deep-cleans',
     title: 'Vansaac Deep Cleans',
     category: 'Business Website',
-    description: 'A business website for a professional cleaning company, with services, pricing, and a WhatsApp booking flow.',
+    description: 'Business website for a cleaning company with services, pricing and a WhatsApp booking flow.',
     tags: ['Next.js', 'React', 'JavaScript'],
     icon: 'sparkles',
     liveUrl: 'https://vansaac-deep-cleans.vercel.app',
     repoUrl: 'https://github.com/VictoriaMirembe/Vansaac-Deep-Cleans',
+    image: {
+      src: '/projects/vansaac-deep-cleans.jpg',
+      alt: 'Vansaac Deep Cleans homepage with the headline "Spotless Spaces, Every Time" and a WhatsApp Us button.',
+    },
   },
   {
     id: 'pearl-flight',
-    title: 'Pearl Flight',
+    title: 'Pearl-Flight',
     category: 'Travel & Aviation',
-    description: 'A travel and aviation business website built with a focus on clean layout and clear booking information.',
+    description: 'Travel and aviation business website.',
     tags: ['HTML', 'CSS', 'JavaScript'],
     icon: 'plane',
     repoUrl: 'https://github.com/VictoriaMirembe/Pearl-Flight',
@@ -272,13 +304,14 @@ export const projects: Project[] = [
     description: 'An AI-powered teaching tool that helps children aged 5 to 8 learn through stories and games using the Claude API.',
     tags: ['Next.js', 'Claude API', 'React'],
     icon: 'bookOpen',
+    status: 'In progress',
   },
   {
-    id: 'mci-e-learning',
-    title: 'MCI E-Learning Platform',
-    category: 'E-Learning Platform',
-    description: 'An e-learning platform for journalism educators to learn about AI-powered disinformation detection.',
-    tags: ['Next.js', 'AI Integration', 'CSS'],
-    icon: 'graduationCap',
+    id: 'data-analytics-practicum',
+    title: 'Data Analytics Practicum (UICT)',
+    category: 'Data Analytics',
+    description: 'Applying statistical models and data cleaning to real-world datasets.',
+    tags: ['Statistical models', 'Data cleaning'],
+    icon: 'barChart',
   },
 ]
