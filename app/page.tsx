@@ -14,6 +14,7 @@ import {
   Send,
   Copy,
   Check,
+  Download,
   LayoutTemplate,
   Palette,
   Plane,
@@ -110,6 +111,10 @@ export default function Home() {
             <p className="hero-description">{intro.hero}</p>
             <div className="hero-buttons">
               <a href="#projects" className="btn">View My Work</a>
+              <a href={profile.resumeUrl} download className="btn-outline">
+                <Download size={16} />
+                Download Résumé
+              </a>
               <a href="#contact" className="btn-outline">Contact Me</a>
               <button onClick={copyEmail} className="btn-outline">
                 {copied ? <Check size={16} /> : <Copy size={16} />}
@@ -121,7 +126,7 @@ export default function Home() {
           <div className="hero-image">
             <Image
               src="/profile.jpg"
-              alt={profile.name}
+              alt={`Portrait of ${profile.name}`}
               width={300}
               height={300}
             />
@@ -371,14 +376,14 @@ export default function Home() {
                 </div>
               </div>
               <div className="contact-card">
-                <FaLinkedin size={18} className="contact-card-icon" color="#0A66C2" />
+                <FaLinkedin size={18} className="contact-card-icon" color="#0A66C2" aria-hidden="true" />
                 <div>
                   <h3>LinkedIn</h3>
                   <a href={profile.linkedin.url} target="_blank" rel="noopener noreferrer">{profile.linkedin.label}</a>
                 </div>
               </div>
               <div className="contact-card">
-                <SiGithub size={18} className="contact-card-icon" />
+                <SiGithub size={18} className="contact-card-icon" aria-hidden="true" />
                 <div>
                   <h3>GitHub</h3>
                   <a href={profile.github.url} target="_blank" rel="noopener noreferrer">{profile.github.label}</a>

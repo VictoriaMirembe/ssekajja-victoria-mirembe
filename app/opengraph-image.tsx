@@ -67,7 +67,7 @@ export default function Image() {
             gap: 16,
           }}
         >
-          {["React", "Next.js", "TypeScript"].map((tag) => (
+          {["React", "Next.js", "Node.js", "Python"].map((tag) => (
             <div
               key={tag}
               style={{

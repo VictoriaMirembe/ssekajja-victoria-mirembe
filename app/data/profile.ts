@@ -94,6 +94,7 @@ export type Profile = {
   }
   email: string
   siteUrl: string
+  resumeUrl: string
   linkedin: Link
   github: Link
   currentEmployer: string
@@ -111,6 +112,8 @@ export const profile: Profile = {
   },
   email: 'victoria.ssekajja@gmail.com',
   siteUrl: 'https://ssekajja-victoria-mirembe-eta-1237.vercel.app',
+  // The PDF lives in /public, so it is served from the site root.
+  resumeUrl: '/Ssekajja_Victoria_Mirembe_Resume.pdf',
   linkedin: {
     label: 'linkedin.com/in/ssekajja-victoria',
     url: 'https://www.linkedin.com/in/ssekajja-victoria-243216284/',
