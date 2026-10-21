@@ -38,8 +38,7 @@ export type Education = {
 export type Experience = {
   role: string
   organisation: string
-  // TODO(victoria): the resume has no dates for these roles yet.
-  period?: string
+  link?: Link
   highlights: string[]
 }
 
@@ -156,13 +155,13 @@ export const aboutFacts: AboutFact[] = [
   { icon: 'sparkles', label: 'AI-Integrated Applications' },
 ]
 
-// Not shown on the site yet (Phase 3).
 export const experience: Experience[] = [
   {
     role: 'Junior AI Data Scientist',
     organisation: 'Media Challenge Initiative (MCI)',
+    link: { label: 'aimedialab.africa', url: 'https://aimedialab.africa' },
     highlights: [
-      'Co-developed the AI Media Lab platform (https://aimedialab.africa), an innovation hub and toolkit equipping journalists and students with AI-powered resources to strengthen fact-based reporting, automate workflows, and combat disinformation across East Africa.',
+      'Co-developed the AI Media Lab platform, an innovation hub and toolkit equipping journalists and students with AI-powered resources to strengthen fact-based reporting, automate workflows, and combat disinformation across East Africa.',
       'Engineered core functional modules utilizing Large Language Models (LLMs) and advanced AI APIs to process text data, support automated media verification, and streamline editorial workflows.',
       'Integrated intelligent features with modern full-stack web architectures to deliver seamless, responsive user experiences tailored for media professionals.',
     ],

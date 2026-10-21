@@ -36,6 +36,7 @@ import {
   stats,
   aboutFacts,
   education,
+  experience,
   skills,
   services,
   servicesNote,
@@ -176,6 +177,41 @@ export default function Home() {
               </div>
             ))}
           </div>
+        </div>
+      </motion.section>
+
+      <motion.section
+        id="experience"
+        className="page-section experience-section"
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.1 }}
+        transition={{ duration: 0.35, ease: 'easeOut' }}
+      >
+        <h2>Experience</h2>
+        <p>Where I have built, led and shipped</p>
+        <div className="experience-list">
+          {experience.map(({ role, organisation, link, highlights }) => (
+            <article key={`${role}-${organisation}`} className="card experience-card">
+              <h3>{role}</h3>
+              <p className="experience-org">{organisation}</p>
+              <ul className="experience-highlights">
+                {highlights.map((highlight) => (
+                  <li key={highlight}>{highlight}</li>
+                ))}
+              </ul>
+              {link && (
+                <a
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="experience-link"
+                >
+                  {link.label} ↗
+                </a>
+              )}
+            </article>
+          ))}
         </div>
       </motion.section>
 

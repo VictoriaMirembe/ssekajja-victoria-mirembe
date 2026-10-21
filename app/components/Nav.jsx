@@ -5,18 +5,11 @@ import { MapPin } from 'lucide-react'
 import ThemeToggle from './ThemeToggle'
 import useScrollSpy from '../hooks/useScrollSpy'
 import { profile, locationLabel } from '../data/profile'
-
-const NAV_ITEMS = [
-  { id: 'home', label: 'Home' },
-  { id: 'about', label: 'About' },
-  { id: 'skills', label: 'Skills' },
-  { id: 'projects', label: 'Projects' },
-  { id: 'contact', label: 'Contact' },
-]
+import { SECTIONS, SECTION_IDS } from '../data/navigation'
 
 export default function Nav() {
   const [menuOpen, setMenuOpen] = useState(false)
-  const activeId = useScrollSpy(NAV_ITEMS.map((item) => item.id))
+  const activeId = useScrollSpy(SECTION_IDS)
 
   return (
     <nav>
@@ -34,7 +27,7 @@ export default function Nav() {
       </button>
 
       <div className={`nav-links ${menuOpen ? 'nav-links-open' : ''}`}>
-        {NAV_ITEMS.map((item) => (
+        {SECTIONS.map((item) => (
           <a
             key={item.id}
             href={`#${item.id}`}
