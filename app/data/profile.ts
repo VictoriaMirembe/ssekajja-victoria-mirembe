@@ -12,6 +12,10 @@ export type IconName =
   | 'layoutTemplate'
   | 'palette'
   | 'barChart'
+  | 'server'
+  | 'database'
+  | 'gitBranch'
+  | 'users'
 
 export type Link = {
   label: string
@@ -36,6 +40,8 @@ export type Education = {
 }
 
 export type Experience = {
+  // 'work' roles are listed first; 'leadership' roles get their own group.
+  kind: 'work' | 'leadership'
   role: string
   organisation: string
   link?: Link
@@ -47,9 +53,10 @@ export type Certification = {
   issuer: string
 }
 
-export type Skill = {
-  label: string
-  href: string
+export type SkillGroup = {
+  title: string
+  icon: IconName
+  skills: string[]
 }
 
 export type Service = {
@@ -163,6 +170,7 @@ export const aboutFacts: AboutFact[] = [
 
 export const experience: Experience[] = [
   {
+    kind: 'work',
     role: 'Junior AI Data Scientist',
     organisation: 'Media Challenge Initiative (MCI)',
     link: { label: 'aimedialab.africa', url: 'https://aimedialab.africa' },
@@ -173,6 +181,7 @@ export const experience: Experience[] = [
     ],
   },
   {
+    kind: 'work',
     role: 'Lead Developer & Student Researcher',
     organisation: 'Cavendish University Uganda',
     highlights: [
@@ -182,6 +191,7 @@ export const experience: Experience[] = [
     ],
   },
   {
+    kind: 'leadership',
     role: 'Class Coordinator / Team Lead',
     organisation: 'Faculty of Science and Technology, Cavendish University Uganda (CUU)',
     highlights: [
@@ -191,6 +201,7 @@ export const experience: Experience[] = [
     ],
   },
   {
+    kind: 'leadership',
     role: 'President',
     organisation: 'Technology Innovators Students Association (TISA), UICT',
     highlights: [
@@ -202,30 +213,53 @@ export const experience: Experience[] = [
   },
 ]
 
-// Not shown on the site yet (Phase 5).
 export const certifications: Certification[] = [
   { name: 'Certificate of Internship', issuer: 'Desis Hub Coding School, Kireka' },
   { name: 'Tech-preneur Mentorship Program', issuer: 'Uganda Institute of Information and Communication Technology' },
 ]
 
-export const skills: { primary: Skill[]; secondary: Skill[] } = {
-  primary: [
-    { label: 'HTML & CSS', href: 'https://developer.mozilla.org/en-US/docs/Web/HTML' },
-    { label: 'JavaScript', href: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript' },
-    { label: 'TypeScript', href: 'https://www.typescriptlang.org/docs/' },
-    { label: 'React', href: 'https://react.dev/' },
-    { label: 'Next.js', href: 'https://nextjs.org/docs' },
-    { label: 'Git & GitHub', href: 'https://docs.github.com/' },
-  ],
-  secondary: [
-    { label: 'Node.js', href: 'https://nodejs.org/en/docs' },
-    { label: 'Python', href: 'https://docs.python.org/3/' },
-    { label: 'PostgreSQL', href: 'https://www.postgresql.org/docs/' },
-    { label: 'Drizzle ORM', href: 'https://orm.drizzle.team/docs/overview' },
-    { label: 'bcrypt', href: 'https://www.npmjs.com/package/bcrypt' },
-    { label: 'Claude AI API', href: 'https://platform.claude.com/docs' },
-  ],
-}
+export const skillGroups: SkillGroup[] = [
+  {
+    title: 'Frontend',
+    icon: 'layoutTemplate',
+    skills: ['HTML5', 'CSS3', 'JavaScript', 'TypeScript', 'React', 'Next.js', 'Responsive, mobile-friendly UI'],
+  },
+  {
+    title: 'Backend & APIs',
+    icon: 'server',
+    skills: ['Node.js', 'REST API development & consumption', 'Drizzle ORM'],
+  },
+  {
+    title: 'AI & LLMs',
+    icon: 'sparkles',
+    skills: ['Anthropic Claude API', 'OpenAI API', 'LLM integrations'],
+  },
+  {
+    title: 'Data & Analytics',
+    icon: 'barChart',
+    skills: ['Python (Pandas, NumPy, Scikit-learn)', 'Data visualization', 'Data cleaning', 'Statistical analysis'],
+  },
+  {
+    title: 'Databases & Security',
+    icon: 'database',
+    skills: ['SQL', 'MySQL', 'PostgreSQL', 'bcrypt'],
+  },
+  {
+    title: 'DevOps',
+    icon: 'gitBranch',
+    skills: ['Git', 'GitHub', 'CI/CD pipelines', 'Contabo VPS hosting'],
+  },
+  {
+    title: 'Design',
+    icon: 'palette',
+    skills: ['UI/UX prototyping', 'Graphic design & digital asset creation'],
+  },
+  {
+    title: 'Leadership',
+    icon: 'users',
+    skills: ['Team leadership', 'Workshop facilitation', 'Technical documentation'],
+  },
+]
 
 export const services: Service[] = [
   {

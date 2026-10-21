@@ -4,15 +4,7 @@ import { useState } from 'react'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
 import Wrapper from './components/Wrapper'
-import {
-  SiHtml5,
-  SiJavascript,
-  SiTypescript,
-  SiReact,
-  SiNextdotjs,
-  SiGithub,
-} from 'react-icons/si'
-import type { IconType } from 'react-icons'
+import { SiGithub } from 'react-icons/si'
 import {
   Sparkles,
   MapPin,
@@ -27,6 +19,10 @@ import {
   Plane,
   BookOpen,
   BarChart3,
+  Server,
+  Database,
+  GitBranch,
+  Users,
   type LucideIcon,
 } from 'lucide-react'
 import { FaLinkedin } from 'react-icons/fa'
@@ -36,8 +32,9 @@ import {
   stats,
   aboutFacts,
   education,
+  certifications,
   experience,
-  skills,
+  skillGroups,
   services,
   servicesNote,
   projects,
@@ -55,16 +52,16 @@ const ICONS: Record<IconName, LucideIcon> = {
   layoutTemplate: LayoutTemplate,
   palette: Palette,
   barChart: BarChart3,
+  server: Server,
+  database: Database,
+  gitBranch: GitBranch,
+  users: Users,
 }
 
-const SKILL_ICONS: Record<string, { Icon: IconType; color?: string }> = {
-  'HTML & CSS': { Icon: SiHtml5, color: '#E34F26' },
-  JavaScript: { Icon: SiJavascript, color: '#F7DF1E' },
-  TypeScript: { Icon: SiTypescript, color: '#3178C6' },
-  React: { Icon: SiReact, color: '#61DAFB' },
-  'Next.js': { Icon: SiNextdotjs },
-  'Git & GitHub': { Icon: SiGithub },
-}
+const EXPERIENCE_GROUPS = [
+  { kind: 'work', title: 'Work' },
+  { kind: 'leadership', title: 'Leadership' },
+] as const
 
 function ProjectBanner({ Icon }: { Icon: React.ComponentType<{ size?: number; strokeWidth?: number }> }) {
   return (
@@ -178,6 +175,18 @@ export default function Home() {
             ))}
           </div>
         </div>
+
+        <div className="education">
+          <h2>Certifications &amp; Training</h2>
+          <div className="education-list">
+            {certifications.map(({ name, issuer }) => (
+              <div key={name} className="card">
+                <h3>{name}</h3>
+                <p>{issuer}</p>
+              </div>
+            ))}
+          </div>
+        </div>
       </motion.section>
 
       <motion.section
@@ -190,29 +199,36 @@ export default function Home() {
       >
         <h2>Experience</h2>
         <p>Where I have built, led and shipped</p>
-        <div className="experience-list">
-          {experience.map(({ role, organisation, link, highlights }) => (
-            <article key={`${role}-${organisation}`} className="card experience-card">
-              <h3>{role}</h3>
-              <p className="experience-org">{organisation}</p>
-              <ul className="experience-highlights">
-                {highlights.map((highlight) => (
-                  <li key={highlight}>{highlight}</li>
+        {EXPERIENCE_GROUPS.map(({ kind, title }) => (
+          <div key={kind} className="experience-group">
+            <h3 className="experience-group-title">{title}</h3>
+            <div className="experience-list">
+              {experience
+                .filter((job) => job.kind === kind)
+                .map(({ role, organisation, link, highlights }) => (
+                  <article key={`${role}-${organisation}`} className="card experience-card">
+                    <h3>{role}</h3>
+                    <p className="experience-org">{organisation}</p>
+                    <ul className="experience-highlights">
+                      {highlights.map((highlight) => (
+                        <li key={highlight}>{highlight}</li>
+                      ))}
+                    </ul>
+                    {link && (
+                      <a
+                        href={link.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="experience-link"
+                      >
+                        {link.label} ↗
+                      </a>
+                    )}
+                  </article>
                 ))}
-              </ul>
-              {link && (
-                <a
-                  href={link.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="experience-link"
-                >
-                  {link.label} ↗
-                </a>
-              )}
-            </article>
-          ))}
-        </div>
+            </div>
+          </div>
+        ))}
       </motion.section>
 
       <motion.section
@@ -226,33 +242,22 @@ export default function Home() {
         <div className="skills">
           <h2>My Skills Set</h2>
           <div className="skills-set">
-            {skills.primary.map(({ label, href }) => {
-              const { Icon, color } = SKILL_ICONS[label]
+            {skillGroups.map(({ title, icon, skills }) => {
+              const Icon = ICONS[icon]
               return (
-                <a
-                  key={label}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="skill"
-                >
-                  <span className="skill-icon">
-                    <Icon size={14} color={color} />
-                  </span>
-                  {label}
-                </a>
+                <div key={title} className="skill-group">
+                  <h3>
+                    <span className="skill-icon"><Icon size={14} /></span>
+                    {title}
+                  </h3>
+                  <ul className="skill-group-list">
+                    {skills.map((skill) => (
+                      <li key={skill} className="skill-sm">{skill}</li>
+                    ))}
+                  </ul>
+                </div>
               )
             })}
-          </div>
-          <div className="skills-secondary">
-            <p className="skills-secondary-label">Also comfortable with (backend &amp; AI)</p>
-            <div className="skills-secondary-set">
-              {skills.secondary.map(({ label, href }) => (
-                <a key={label} href={href} target="_blank" rel="noopener noreferrer" className="skill-sm">
-                  {label}
-                </a>
-              ))}
-            </div>
           </div>
         </div>
 

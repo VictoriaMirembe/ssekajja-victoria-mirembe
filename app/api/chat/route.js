@@ -7,7 +7,7 @@ import {
   experience,
   education,
   certifications,
-  skills,
+  skillGroups,
   projects,
 } from "../../data/profile";
 
@@ -25,12 +25,13 @@ About ${profile.firstName}:
 - ${profile.title} based in ${locationLabel}.
 - ${intro.about}
 - Experience:
-${bullets(experience.map((job) => `${job.role}, ${job.organisation}: ${job.highlights.join(" ")}`))}
+${bullets(experience.map((job) => `${job.role}, ${job.organisation}${job.kind === "leadership" ? " (leadership role)" : ""}: ${job.highlights.join(" ")}`))}
 - Education:
 ${bullets(education.map((e) => `${e.qualification}, ${e.institution} (${e.period})${e.honour ? `, ${e.honour}` : ""}`))}
 - Certifications & training:
 ${bullets(certifications.map((c) => `${c.name}, ${c.issuer}`))}
-- Skills: ${[...skills.primary, ...skills.secondary].map((s) => s.label).join(", ")}.
+- Skills:
+${bullets(skillGroups.map((group) => `${group.title}: ${group.skills.join(", ")}`))}
 - Projects:
 ${bullets(projects.map((p) => `${p.title}: ${p.description} (${p.tags.join(", ")})${p.liveUrl ? ` Live: ${p.liveUrl}` : ""}${p.repoUrl ? ` Code: ${p.repoUrl}` : ""}`))}
 - Contact details: ${profile.email}, LinkedIn ${profile.linkedin.url}, GitHub ${profile.github.url}`;
