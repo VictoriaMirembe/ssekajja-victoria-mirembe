@@ -1,5 +1,6 @@
 import React from 'react'
 import { MapPin } from 'lucide-react'
+import { profile, locationLabel } from '../data/profile'
 
 function Footer() {
   const year = new Date().getFullYear()
@@ -10,23 +11,23 @@ function Footer() {
 
         <div className="footer-top">
           <div className="logo-group">
-            <a href="#home" className="logo">Victoria</a>
-            <span className="location-badge"><MapPin size={12} /> Based in Kampala, Uganda</span>
+            <a href="#home" className="logo">{profile.firstName}</a>
+            <span className="location-badge"><MapPin size={12} /> Based in {locationLabel}</span>
           </div>
           <div className="footer-status">
             <span className="status-dot"></span>
-            Available for work
+            {profile.availability}
           </div>
         </div>
 
         <div className="footer-links">
-          <a href="https://github.com/VictoriaMirembe" target="_blank" rel="noopener noreferrer">GitHub</a>
-          <a href="https://www.linkedin.com/in/ssekajja-victoria-243216284/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-          <a href="mailto:jemistates7@gmail.com">Email</a>
+          <a href={profile.github.url} target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href={profile.linkedin.url} target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a href={`mailto:${profile.email}`}>Email</a>
         </div>
 
         <p className="footer-copyright">
-          © {year} Victoria Ssekajja. All rights reserved.
+          © {year} {profile.name}. All rights reserved.
         </p>
 
       </div>

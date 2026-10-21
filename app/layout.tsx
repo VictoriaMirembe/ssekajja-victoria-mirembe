@@ -6,7 +6,8 @@ import Footer from "./components/Footer";
 import Nav from "./components/Nav";
 import SideNav from "./components/SideNav";
 import { ThemeProvider } from "./context/ThemeContext";
-import { SITE_URL, SITE_NAME, SITE_TITLE, SITE_DESCRIPTION } from "./site-config";
+import { SITE_URL, SITE_NAME, SITE_TITLE, SITE_DESCRIPTION, SITE_KEYWORDS } from "./site-config";
+import { profile } from "./data/profile";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -22,16 +23,9 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: SITE_TITLE,
   description: SITE_DESCRIPTION,
-  keywords: [
-    "Victoria Ssekajja",
-    "Frontend Developer",
-    "React Developer",
-    "Next.js Developer",
-    "Web Developer Uganda",
-    "Kampala Uganda",
-  ],
-  authors: [{ name: "Victoria Ssekajja", url: SITE_URL }],
-  creator: "Victoria Ssekajja",
+  keywords: SITE_KEYWORDS,
+  authors: [{ name: profile.name, url: SITE_URL }],
+  creator: profile.name,
   openGraph: {
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
@@ -50,23 +44,19 @@ export const metadata: Metadata = {
 const personJsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
-  name: "Victoria Ssekajja",
-  alternateName: "Ssekajja Victoria Mirembe",
-  jobTitle: "Frontend Developer",
+  name: profile.name,
+  jobTitle: profile.title,
   url: SITE_URL,
   worksFor: {
     "@type": "Organization",
-    name: "MCI Media Lab",
+    name: profile.currentEmployer,
   },
   address: {
     "@type": "PostalAddress",
-    addressLocality: "Kampala",
-    addressCountry: "UG",
+    addressLocality: profile.location.city,
+    addressCountry: profile.location.countryCode,
   },
-  sameAs: [
-    "https://github.com/VictoriaMirembe",
-    "https://www.linkedin.com/in/ssekajja-victoria-243216284/",
-  ],
+  sameAs: [profile.github.url, profile.linkedin.url],
 }
 
 export default function RootLayout({

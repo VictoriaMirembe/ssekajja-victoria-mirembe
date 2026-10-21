@@ -197,22 +197,23 @@ p {
   gap: 16px;
 }
 
-.skill {
-  font-family: var(--font-geist-mono), monospace;
+.skill-group {
   background: var(--surface);
   border: 1px solid var(--border);
-  color: var(--text);
-  padding: 18px;
   border-radius: 10px;
-  text-align: center;
-  font-size: 16px;
-  font-weight: bold;
-  text-decoration: none;
+  padding: 20px;
+  text-align: left;
+}
+
+.skill-group h3 {
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 10px;
-  transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 15px;
+  font-weight: bold;
+  color: var(--text);
+  margin-bottom: 14px;
 }
 
 .skill-icon {
@@ -224,47 +225,25 @@ p {
   height: 26px;
   border-radius: 50%;
   background: var(--accent-light);
+  color: var(--accent);
 }
 
-.skill:hover {
-  transform: translateY(-2px);
-  border-color: var(--accent);
-  box-shadow: var(--shadow);
-}
-
-.skills-secondary {
-  margin-top: 28px;
-}
-
-.skills-secondary-label {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--text-muted);
-  margin-bottom: 12px;
-}
-
-.skills-secondary-set {
+.skill-group-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 8px;
+  list-style: none;
 }
 
 .skill-sm {
   font-family: var(--font-geist-mono), monospace;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 600;
   color: var(--text-muted);
   background: var(--surface-alt);
   border: 1px solid var(--border);
-  padding: 7px 14px;
+  padding: 5px 12px;
   border-radius: 99px;
-  text-decoration: none;
-  transition: color 0.15s ease, border-color 0.15s ease;
-}
-
-.skill-sm:hover {
-  color: var(--accent);
-  border-color: var(--accent);
 }
 
 .education {
@@ -537,14 +516,18 @@ p {
 .hero-image {
   flex-shrink: 0;
   position: relative;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1px solid var(--border);
 }
 
+/* Zoomed slightly so the photo's dark corners fall outside the circle. */
 .hero-image img {
+  display: block;
   width: 300px;
   height: 300px;
-  border-radius: 20px;
   object-fit: cover;
-  border: 1px solid var(--border);
+  transform: scale(1.06);
 }
 
 .stats-section {
@@ -987,6 +970,48 @@ p {
   margin-bottom: 16px;
 }
 
+.featured-project-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.project-card-shot img {
+  object-fit: cover;
+  object-position: top;
+}
+
+.project-status {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 2px 8px;
+  border: 1px solid var(--border);
+  border-radius: 99px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  vertical-align: middle;
+}
+
+.project-links {
+  display: flex;
+  gap: 16px;
+  margin-top: auto;
+  padding-top: 16px;
+}
+
+.project-link {
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.project-link:hover {
+  text-decoration: underline;
+}
+
 /* ---- FOOTER ---- */
 
 .site-footer {
@@ -1111,6 +1136,82 @@ html {
   flex-shrink: 0;
 }
 
+/* ---- EXPERIENCE ---- */
+
+.experience-section {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 32px 24px 0;
+}
+
+.experience-section > h2 {
+  font-size: 32px;
+  font-weight: bold;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.experience-section > p {
+  font-size: 17px;
+  color: var(--text-muted);
+  margin-bottom: 32px;
+}
+
+.experience-group + .experience-group {
+  margin-top: 40px;
+}
+
+.experience-group-title {
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+
+.experience-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.experience-card {
+  border-left: 3px solid var(--accent);
+}
+
+.experience-org {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--accent);
+  margin-bottom: 14px;
+}
+
+.experience-highlights {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-left: 20px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+.experience-link {
+  display: inline-block;
+  margin-top: 14px;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.experience-link:hover {
+  text-decoration: underline;
+}
+
 .skills-section {
   padding-top: 80px;
 }
@@ -1129,14 +1230,6 @@ html {
 
 .skills-section .skills-set {
   grid-template-columns: repeat(4, 1fr);
-}
-
-.skills-section .skills-secondary {
-  text-align: center;
-}
-
-.skills-section .skills-secondary-set {
-  justify-content: center;
 }
 
 /* ---- NAV: ACTIVE LINK + MOBILE MENU ---- */
@@ -1265,6 +1358,7 @@ html {
 
   .services-section,
   .skills-section,
+  .experience-section,
   .featured-projects-section {
     padding-left: 20px;
     padding-right: 20px;

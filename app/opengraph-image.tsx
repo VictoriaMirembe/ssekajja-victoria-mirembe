@@ -1,6 +1,8 @@
 import { ImageResponse } from "next/og"
+import { SITE_TITLE } from "./site-config"
+import { profile, locationLabel } from "./data/profile"
 
-export const alt = "Victoria Ssekajja — Frontend Developer"
+export const alt = SITE_TITLE
 export const size = {
   width: 1200,
   height: 630,
@@ -35,7 +37,7 @@ export default function Image() {
             marginBottom: 28,
           }}
         >
-          Kampala, Uganda
+          {locationLabel}
         </div>
         <div
           style={{
@@ -46,7 +48,7 @@ export default function Image() {
             marginBottom: 16,
           }}
         >
-          Victoria Ssekajja
+          {profile.name}
         </div>
         <div
           style={{
@@ -57,7 +59,7 @@ export default function Image() {
             marginBottom: 40,
           }}
         >
-          Frontend Developer
+          {profile.title}
         </div>
         <div
           style={{
@@ -65,7 +67,7 @@ export default function Image() {
             gap: 16,
           }}
         >
-          {["React", "Next.js", "TypeScript"].map((tag) => (
+          {["React", "Next.js", "Node.js", "Python"].map((tag) => (
             <div
               key={tag}
               style={{

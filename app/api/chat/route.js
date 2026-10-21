@@ -1,27 +1,40 @@
 import Anthropic from "@anthropic-ai/sdk";
 import { NextResponse } from "next/server";
+import {
+  profile,
+  locationLabel,
+  intro,
+  experience,
+  education,
+  certifications,
+  skillGroups,
+  projects,
+} from "../../data/profile";
 
 const client = new Anthropic();
 
-const SYSTEM_PROMPT = `You are Victoria's portfolio assistant. Answer questions about Victoria Ssekajja
-in a friendly, concise way, using only the facts below. If asked something you don't know, say you're
-not sure and suggest reaching out to Victoria directly via the Contact page. Do not hallucinate.
+const bullets = (items) => items.map((item) => `  - ${item}`).join("\n");
 
-About Victoria:
-- Frontend Developer based in Kampala, Uganda, currently working at MCI Media Lab as the Junior AI Data Scientist
-- Builds web, mobile, and backend applications, and integrates AI capabilities where they add value.
-- Skills: HTML & CSS, JavaScript, React, Next.js, React Native, Node.js & Express, databases (MongoDB/SQL),
-  REST APIs, the Claude AI API, and Git & GitHub Drizzle ORM, bcrypt, Python, Prisma.
-- Education: Diploma in Data Science Management Analytics and Uganda Institute of Information and
-  Communication Technology, 2026, Diploma in Computer Science and Information Technology at Cavendish University Uganda,2026 Completed a Certificate in Information and Communication Technology with a first class.
+// Built from the same data file as the site, so the chatbot can never
+// contradict what visitors see on the page.
+const SYSTEM_PROMPT = `You are ${profile.firstName}'s portfolio assistant. Answer questions about ${profile.name}
+in a friendly, concise way, using only the facts below. If asked something you don't know, say you're
+not sure and suggest reaching out to ${profile.firstName} directly via the Contact section. Do not hallucinate.
+
+About ${profile.firstName}:
+- ${profile.title} based in ${locationLabel}.
+- ${intro.about.join(" ")}
+- Experience:
+${bullets(experience.map((job) => `${job.role}, ${job.organisation}${job.kind === "leadership" ? " (leadership role)" : ""}: ${job.highlights.join(" ")}`))}
+- Education:
+${bullets(education.map((e) => `${e.qualification}, ${e.institution} (${e.period})${e.honour ? `, ${e.honour}` : ""}`))}
+- Certifications & training:
+${bullets(certifications.map((c) => `${c.name}, ${c.issuer}`))}
+- Skills:
+${bullets(skillGroups.map((group) => `${group.title}: ${group.skills.join(", ")}`))}
 - Projects:
-  -Vansaac Deep Cleans: A web based platform showcasing the wins of Vansaac deep cleans as a cleaning company
-  - Zara AI Story Friend: an AI-powered teaching tool that helps children aged 5-8 learn through
-    stories and games using the Claude API (Next.js, React).
-  - MCI E Learning Platform: an e-learning platform for journalism educators to learn about
-    AI powered disinformation detection (Next.js).
-  - This portfolio site, built with Next.js and React.
-- Contact details: jemistates7@gmail.com, +256 709 001 009, +256 763 974 725`;
+${bullets(projects.map((p) => `${p.title}: ${p.description} (${p.tags.join(", ")})${p.liveUrl ? ` Live: ${p.liveUrl}` : ""}${p.repoUrl ? ` Code: ${p.repoUrl}` : ""}`))}
+- Contact details: ${profile.email}, LinkedIn ${profile.linkedin.url}, GitHub ${profile.github.url}`;
 
 export async function POST(request) {
   try {

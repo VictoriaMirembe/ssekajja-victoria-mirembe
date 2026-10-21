@@ -1,5 +1,14 @@
-export const SITE_URL = "https://ssekajja-victoria-mirembe-eta-1237.vercel.app"
-export const SITE_NAME = "Victoria Ssekajja"
-export const SITE_TITLE = "Victoria Ssekajja — Frontend Developer"
-export const SITE_DESCRIPTION =
-  "Portfolio of Victoria Ssekajja, a Frontend Developer building interfaces with React and Next.js, based in Kampala, Uganda."
+import { profile, intro } from "./data/profile"
+
+export const SITE_URL = profile.siteUrl
+export const SITE_NAME = profile.name
+export const SITE_TITLE = `${profile.name} — ${profile.title}`
+export const SITE_DESCRIPTION = intro.siteDescription
+export const SITE_KEYWORDS = [
+  profile.name,
+  profile.title,
+  "React Developer",
+  "Next.js Developer",
+  `Web Developer ${profile.location.country}`,
+  `${profile.location.city} ${profile.location.country}`,
+]
