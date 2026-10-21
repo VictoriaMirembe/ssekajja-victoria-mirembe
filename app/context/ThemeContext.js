@@ -1,26 +1,34 @@
 'use client';
 
-import { createContext, useContext, useState, useEffect } from 'react';
+import { createContext, useContext, useSyncExternalStore } from 'react';
 
 // 1. Create the "radio station"
 const ThemeContext = createContext();
 
+// The saved theme lives in localStorage, outside React. These three helpers
+// let React read it directly instead of copying it into state in an effect.
+const THEME_EVENT = 'theme-change';
+
+function subscribe(onChange) {
+  window.addEventListener(THEME_EVENT, onChange);
+  window.addEventListener('storage', onChange); // theme changed in another tab
+  return () => {
+    window.removeEventListener(THEME_EVENT, onChange);
+    window.removeEventListener('storage', onChange);
+  };
+}
+
+const getSnapshot = () => localStorage.getItem('theme') === 'dark';
+const getServerSnapshot = () => false; // the server can't see localStorage
+
 // 2. This is the "broadcaster" — it wraps your whole app
 export function ThemeProvider({ children }) {
-  const [isDark, setIsDark] = useState(false);
-
   // Remember the user's choice even after page refresh
-  useEffect(() => {
-    const saved = localStorage.getItem('theme');
-    if (saved === 'dark') setIsDark(true);
-  }, []);
+  const isDark = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 
   const toggleTheme = () => {
-    setIsDark(prev => {
-      const next = !prev;
-      localStorage.setItem('theme', next ? 'dark' : 'light');
-      return next;
-    });
+    localStorage.setItem('theme', isDark ? 'light' : 'dark');
+    window.dispatchEvent(new Event(THEME_EVENT));
   };
 
   return (

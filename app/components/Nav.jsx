@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { MapPin } from 'lucide-react'
 import ThemeToggle from './ThemeToggle'
 import useScrollSpy from '../hooks/useScrollSpy'
+import { profile, locationLabel } from '../data/profile'
 
 const NAV_ITEMS = [
   { id: 'home', label: 'Home' },
@@ -20,8 +21,8 @@ export default function Nav() {
   return (
     <nav>
       <div className="logo-group">
-        <a href="#home" className="logo">Victoria</a>
-        <span className="location-badge"><MapPin size={12} /> Based in Kampala, Uganda</span>
+        <a href="#home" className="logo">{profile.firstName}</a>
+        <span className="location-badge"><MapPin size={12} /> Based in {locationLabel}</span>
       </div>
 
       <button
