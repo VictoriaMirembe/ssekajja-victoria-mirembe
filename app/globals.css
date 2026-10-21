@@ -516,14 +516,18 @@ p {
 .hero-image {
   flex-shrink: 0;
   position: relative;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1px solid var(--border);
 }
 
+/* Zoomed slightly so the photo's dark corners fall outside the circle. */
 .hero-image img {
+  display: block;
   width: 300px;
   height: 300px;
-  border-radius: 20px;
   object-fit: cover;
-  border: 1px solid var(--border);
+  transform: scale(1.06);
 }
 
 .stats-section {

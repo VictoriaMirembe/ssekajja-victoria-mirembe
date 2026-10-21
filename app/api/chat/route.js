@@ -23,7 +23,7 @@ not sure and suggest reaching out to ${profile.firstName} directly via the Conta
 
 About ${profile.firstName}:
 - ${profile.title} based in ${locationLabel}.
-- ${intro.about}
+- ${intro.about.join(" ")}
 - Experience:
 ${bullets(experience.map((job) => `${job.role}, ${job.organisation}${job.kind === "leadership" ? " (leadership role)" : ""}: ${job.highlights.join(" ")}`))}
 - Education:

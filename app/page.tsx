@@ -113,7 +113,7 @@ export default function Home() {
               <a href="#projects" className="btn">View My Work</a>
               <a href={profile.resumeUrl} download className="btn-outline">
                 <Download size={16} />
-                Download Résumé
+                Download Resume
               </a>
               <a href="#contact" className="btn-outline">Contact Me</a>
               <button onClick={copyEmail} className="btn-outline">
@@ -154,7 +154,9 @@ export default function Home() {
       >
         <h1>Learn About Me</h1>
         <p className="about-hook">{intro.aboutHook}</p>
-        <p>{intro.about}</p>
+        {intro.about.map((paragraph) => (
+          <p key={paragraph}>{paragraph}</p>
+        ))}
 
         <div className="about-facts">
           {aboutFacts.map(({ icon, label }) => {

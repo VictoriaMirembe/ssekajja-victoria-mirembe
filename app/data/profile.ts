@@ -129,9 +129,13 @@ export const profile: Profile = {
 export const locationLabel = `${profile.location.city}, ${profile.location.country}`
 
 export const intro = {
-  hero: `I build fast, accessible, well-crafted interfaces with React and Next.js, and integrate AI where it adds real value. Based in ${locationLabel}.`,
+  // Shortened from the Profile section of the resume.
+  hero: 'Detail oriented Software Engineer and Data Science professional building scalable full stack applications and production-grade AI tools with React, Next.js, Node.js and Python.',
   aboutHook: 'Turning ideas into reliable, shipped software.',
-  about: `I am ${profile.firstName}, a ${profile.title} based in ${locationLabel}, currently working at ${profile.currentEmployer}. I build interfaces with React and Next.js, am comfortable working across the stack when a project needs it, and integrate AI capabilities where they add real value.`,
+  about: [
+    `I am ${profile.firstName}, a ${profile.title} based in ${locationLabel}, currently working at ${profile.currentEmployer}. I have hands on experience building scalable full stack applications, integrating Large Language Models (LLMs) like Claude and OpenAI, and developing production-grade AI tools for modern media and enterprise ecosystems.`,
+    'I combine front-end development with a strong foundation in database management, RESTful API architectures, and intelligent automation. A fast learner and clear communicator, I have a proven ability to lead development teams, architect robust codebases, and support diverse audiences, from technical stakeholders to non-technical users in training and workshop settings, from concept to deployment.',
+  ],
   siteDescription: `Portfolio of ${profile.name}, a ${profile.title} building web applications and AI-powered tools with React, Next.js, Node.js and Python, based in ${locationLabel}.`,
   contact: 'I am open to opportunities, collaborations and conversations. Feel free to reach out.',
 }
