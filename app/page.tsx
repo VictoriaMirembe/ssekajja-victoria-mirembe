@@ -24,6 +24,8 @@ import {
   Database,
   GitBranch,
   Users,
+  ShoppingCart,
+  Sprout,
   type LucideIcon,
 } from 'lucide-react'
 import { FaLinkedin } from 'react-icons/fa'
@@ -57,6 +59,8 @@ const ICONS: Record<IconName, LucideIcon> = {
   database: Database,
   gitBranch: GitBranch,
   users: Users,
+  shoppingCart: ShoppingCart,
+  sprout: Sprout,
 }
 
 const EXPERIENCE_GROUPS = [
@@ -249,7 +253,7 @@ export default function Home() {
         <div className="skills">
           <h2>My Skills Set</h2>
           <div className="skills-set">
-            {skillGroups.map(({ title, icon, skills }) => {
+            {skillGroups.map(({ title, icon, technologies, practices = [] }) => {
               const Icon = ICONS[icon]
               return (
                 <div key={title} className="skill-group">
@@ -258,8 +262,11 @@ export default function Home() {
                     {title}
                   </h3>
                   <ul className="skill-group-list">
-                    {skills.map((skill) => (
-                      <li key={skill} className="skill-sm">{skill}</li>
+                    {technologies.map((tech) => (
+                      <li key={tech} className="skill-sm">{tech}</li>
+                    ))}
+                    {practices.map((practice) => (
+                      <li key={practice} className="skill-sm skill-practice">{practice}</li>
                     ))}
                   </ul>
                 </div>

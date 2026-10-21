@@ -16,6 +16,8 @@ export type IconName =
   | 'database'
   | 'gitBranch'
   | 'users'
+  | 'shoppingCart'
+  | 'sprout'
 
 export type Link = {
   label: string
@@ -56,7 +58,10 @@ export type Certification = {
 export type SkillGroup = {
   title: string
   icon: IconName
-  skills: string[]
+  // Named tools, languages and frameworks; these are what the Technologies stat counts.
+  technologies: string[]
+  // Practices and abilities, shown in the same card but not counted as technologies.
+  practices?: string[]
 }
 
 export type Service = {
@@ -140,14 +145,6 @@ export const intro = {
   contact: 'I am open to opportunities, collaborations and conversations. Feel free to reach out.',
 }
 
-export const stats: Stat[] = [
-  { value: '4+', label: 'Years Coding' },
-  { value: '19', label: 'Projects Built' },
-  { value: '7', label: 'Technologies' },
-  // Public repo count from api.github.com/users/VictoriaMirembe on 2026-10-12.
-  { value: '24', label: 'GitHub Repos' },
-]
-
 export const education: Education[] = [
   {
     qualification: 'Diploma in Data Science Management and Analytics',
@@ -229,43 +226,62 @@ export const skillGroups: SkillGroup[] = [
   {
     title: 'Frontend',
     icon: 'layoutTemplate',
-    skills: ['HTML5', 'CSS3', 'JavaScript', 'TypeScript', 'React', 'Next.js', 'Responsive, mobile-friendly UI'],
+    technologies: ['HTML5', 'CSS3', 'JavaScript', 'TypeScript', 'React', 'Next.js'],
+    practices: ['Responsive, mobile-friendly UI'],
   },
   {
     title: 'Backend & APIs',
     icon: 'server',
-    skills: ['Node.js', 'REST API development & consumption', 'Drizzle ORM'],
+    technologies: ['Node.js', 'Drizzle ORM'],
+    practices: ['REST API development & consumption'],
   },
   {
     title: 'AI & LLMs',
     icon: 'sparkles',
-    skills: ['Anthropic Claude API', 'OpenAI API', 'LLM integrations'],
+    technologies: ['Anthropic Claude API', 'OpenAI API'],
+    practices: ['LLM integrations'],
   },
   {
     title: 'Data & Analytics',
     icon: 'barChart',
-    skills: ['Python (Pandas, NumPy, Scikit-learn)', 'Data visualization', 'Data cleaning', 'Statistical analysis'],
+    technologies: ['Python', 'Pandas', 'NumPy', 'Scikit-learn'],
+    practices: ['Data visualization', 'Data cleaning', 'Statistical analysis'],
   },
   {
     title: 'Databases & Security',
     icon: 'database',
-    skills: ['SQL', 'MySQL', 'PostgreSQL', 'bcrypt'],
+    technologies: ['SQL', 'MySQL', 'PostgreSQL', 'bcrypt'],
   },
   {
     title: 'DevOps',
     icon: 'gitBranch',
-    skills: ['Git', 'GitHub', 'CI/CD pipelines', 'Contabo VPS hosting'],
+    technologies: ['Git', 'GitHub', 'Contabo VPS hosting'],
+    practices: ['CI/CD pipelines'],
   },
   {
     title: 'Design',
     icon: 'palette',
-    skills: ['UI/UX prototyping', 'Graphic design & digital asset creation'],
+    technologies: [],
+    practices: ['UI/UX prototyping', 'Graphic design & digital asset creation'],
   },
   {
     title: 'Leadership',
     icon: 'users',
-    skills: ['Team leadership', 'Workshop facilitation', 'Technical documentation'],
+    technologies: [],
+    practices: ['Team leadership', 'Workshop facilitation', 'Technical documentation'],
   },
+]
+
+const technologyCount = skillGroups.reduce((total, group) => total + group.technologies.length, 0)
+
+export const stats: Stat[] = [
+  { value: '4+', label: 'Years Coding' },
+  // Confirmed by Victoria on 2026-10-21.
+  { value: '19', label: 'Projects Built' },
+  // Counted from the Skills section above, so it always matches what visitors see.
+  { value: String(technologyCount), label: 'Technologies' },
+  // 24 public + 4 private repositories (GitHub, checked 2026-10-21).
+  { value: '28', label: 'GitHub Repos' },
 ]
 
 export const services: Service[] = [
@@ -307,6 +323,20 @@ export const projects: Project[] = [
     },
   },
   {
+    id: 'agri-moist-ai',
+    title: 'AgriMoist AI',
+    category: 'AI Advisory Agent',
+    description: 'An AI advisory agent for smallholder farmers in Karamoja, Uganda. It works offline in the field and combines farm data, weather, soil moisture and pest reports to draft sourced, plain-language advice. An extension officer approves every message before it reaches a farmer.',
+    tags: ['Python', 'FastAPI', 'LangGraph'],
+    icon: 'sprout',
+    liveUrl: 'https://agri-moist-ai.onrender.com/',
+    repoUrl: 'https://github.com/VictoriaMirembe/Agri-moist-AI',
+    image: {
+      src: '/projects/agri-moist-ai.jpg',
+      alt: 'AgriMoist AI USSD simulator: a basic-phone keypad beside the heading "Use a basic phone" and the dial code *384*5951#.',
+    },
+  },
+  {
     id: 'hr-system',
     title: 'HR-System',
     category: 'HR Platform',
@@ -314,6 +344,25 @@ export const projects: Project[] = [
     tags: ['Next.js', 'PostgreSQL'],
     icon: 'layoutTemplate',
     repoUrl: 'https://github.com/VictoriaMirembe/HR-System',
+  },
+  {
+    id: 'point-of-sale',
+    title: 'My-POS (Point of Sale)',
+    category: 'Business System',
+    description: 'A Point of Sale system that helps small businesses manage day-to-day sales, track inventory, and process transactions efficiently.',
+    tags: ['Next.js', 'TypeScript', 'Prisma'],
+    icon: 'shoppingCart',
+    repoUrl: 'https://github.com/VictoriaMirembe/Point-of-Sale',
+  },
+  {
+    // Private repository, so no public link.
+    id: 'nexus-consortium',
+    title: 'Nexus Consortium Platform',
+    category: 'Collaboration Platform',
+    // Features taken from the app's pages and API routes; the repo README has no description yet.
+    description: 'A social collaboration platform for consortiums, with partner invitations, a shared feed with comments and reactions, events, milestones, a partner map and notifications.',
+    tags: ['Next.js', 'Drizzle ORM', 'PostgreSQL'],
+    icon: 'users',
   },
   {
     id: 'vansaac-deep-cleans',
